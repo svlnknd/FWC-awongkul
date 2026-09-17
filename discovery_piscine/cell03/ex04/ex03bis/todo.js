@@ -1,8 +1,8 @@
 
-const create = document.getElementById("create");
-const list = document.getElementById("ft_list");
+const create = $("#create");
+const list = $("#ft_list");
 
-create.addEventListener("click", function() { 
+create.on("click", function() { 
 
 	const text = prompt("new TODO:");
 
@@ -10,16 +10,16 @@ create.addEventListener("click", function() {
 		return;
 	}
 
-	const todo = document.createElement("div");
+	const todo = $("<div>");
 	
-	todo.textContent = text;
+	todo.text(text);
 
 
 
 	list.prepend(todo);
 
 
-	todo.addEventListener("click", function() {
+	todo.on("click", function() {
 
 	const removeConfirm = confirm("remove TODO?");
 
@@ -42,7 +42,7 @@ cookieEverything();
 function cookieEverything() {
 	const everything = [];
 
-	for (const todo of list.children){
+	for (const todo of list.children()){
 		everything.push(todo.textContent);
 	}
 
@@ -62,11 +62,11 @@ function loadHtmlCookie() {
 		const e = JSON.parse(c);
 
 		for (const text of e) {
-			const todo = document.createElement("div");
-			todo.textContent = text;
+			const todo = $("<div>");
+			todo.text(text);
 			list.append(todo);
 				
-			todo.addEventListener("click", function(){
+			todo.on("click", function(){
 
 				const removeConfirm = confirm("remove TODO?");
 					
