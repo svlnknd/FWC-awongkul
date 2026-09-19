@@ -1,0 +1,262 @@
+* {
+	box-sizing: border-box;
+    user-select: none;
+}
+html, body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	position: relative;
+	background-color: #2c2d32;
+}
+#profiles {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	pointer-events: none;
+}
+.pfp {
+	position: fixed;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	object-fit: cover;
+	cursor: grab; /* cool grabbing cursor */
+	user-select: none;
+	-webkit-user-drag: none;
+	pointer-events: auto;
+	z-index: 20;
+}
+.pfp:nth-child(1) {
+	left: 2%;
+	top: 4%;
+}
+.pfp:nth-child(2) {
+	left: 12%;
+	top: 4%;
+}
+
+.pfp.shoot-fade {
+	pointer-events: none;
+	animation: pfp-fade 0.25s linear forwards;
+}
+@keyframes pfp-fade {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+.pfp.flying {
+	display: block !important;
+	width: 82.5px !important;
+	height: 82.5px !important;
+	pointer-events: none;
+	z-index: 100;
+	animation: fly-up 0.1s linear forwards, fly-fade-in 0.04s linear forwards;
+}
+
+@keyframes fly-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes fly-up {
+	from {
+		transform: translate(0, 0);
+	}
+	to {
+		transform: translate(-12vh, -120vh);
+	}
+}
+#roulette {
+	position: fixed;
+	left: 30px;
+	bottom: 30px;
+	width: 150px;
+	height: 150px;
+	object-fit: contain;
+	z-index: 10;
+	user-select: none;
+	-webkit-user-drag: none;
+	animation: roulette-spin 1s linear infinite;
+}
+@keyframes roulette-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+body.shooting #roulette {
+	animation: roulette-to-center 0.6s linear(
+    0 0%, 0.002 14.7%, 0.016 25%, 0.111 37.5%, 
+    0.5 50%, 0.889 62.5%, 0.984 75%, 0.998 85.3%, 1 100%
+  ) forwards, roulette-scale 0.4s 1s ease-out forwards, roulette-fade 0.3s 1.4s linear forwards;
+}
+@keyframes roulette-to-center {
+	from {
+		left: 30px;
+		bottom: 30px;
+		transform: rotate(0deg);
+	}
+	to {
+		left: 50%;
+		bottom: 50%;
+		transform: translate(-50%, 50%) rotate(360deg);
+	}
+}
+@keyframes roulette-scale {
+	from {
+		left: 50%;
+		bottom: 50%;
+		transform: translate(-50%,50%) rotate(360deg) scale(1);
+		opacity: 1;
+	}
+	to {
+		left: 50%;
+		bottom: 50%;
+		transform: translate(-50%,50%) rotate(360deg) scale(1.5);
+		opacity: 1;
+	}
+}
+@keyframes roulette-fade {
+	from {
+		left: 50%;
+		bottom: 50%;
+		transform: translate(-50%,50%) rotate(360deg) scale(1.5);
+		opacity: 1;
+	}
+	to {
+		left: 50%;
+		bottom: 50%;
+		transform: translate(-50%,50%) rotate(360deg) scale(1.5);
+		opacity: 0;
+	}
+}
+#gun {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	width: 262.5px;
+	transform: translate(100vw,-50%) rotate(0deg);
+	transform-origin: center;
+	z-index: 30;
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+body.shooting #gun {
+	animation: gun-enter 1s linear(
+    0 0%, 0.002 14.7%, 0.016 25%, 0.111 37.5%, 
+    0.5 50%, 0.889 62.5%, 0.984 75%, 0.998 85.3%, 1 100%
+  ) forwards, gun-rotate 0.8s 1.8s ease-in-out forwards;
+}
+@keyframes gun-enter {
+	from { transform: translate(100vw, -50%) rotate(0deg); }
+	to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+@keyframes gun-rotate {
+	from { transform: translate(-50%, -50%) rotate(0deg); }
+	to { transform: translate(-50%, -50%) rotate(435deg); }
+}
+#eyes {
+	position: fixed;
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+.eye {
+	position: absolute;
+	top: 50%;
+	width: 35vw;
+	max-height: 80vh;
+	object-fit: contain;
+}
+.eye-left {
+	left: 3%;
+	transform: translateY(-50%);
+}
+.eye-right {
+	right: 3%;
+	transform: translateY(-50%) scaleX(-1);
+}
+#eyes.flash {
+	animation: eye-flash 1s forwards;
+}
+@keyframes eye-flash {
+	0% { opacity: 0; }
+	10% { opacity: 1; }
+	30% { opacity: 1; }
+	100% { opacity: 0; }
+}
+#shoot {
+	position: fixed;
+	right: 40px;
+	bottom: 40px;
+	padding: 18px 35px;
+	border: 0;
+	border-radius: 8px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s;
+	z-index: 50;
+    border: 2px solid rgb(145, 145, 145);
+    background-color: rgba(216, 216, 216, 1);
+}
+#shoot.visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#gun.recoil {
+	animation: gun-recoil 0.3s ease-out forwards !important;
+}
+
+@keyframes gun-recoil {
+	from {
+		transform: translate(-50%, -50%) rotate(435deg);
+	}
+	to {
+		transform: translate(calc(-50% + 12vh), calc(-50% + 100vh)) rotate(440deg);
+	}
+}
+
+#bottomtext {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    z-index: 50;
+    text-decoration: none;
+}
+
+#bottomtext a {
+    color: rgb(255, 208, 80);
+    text-decoration: none;
+}
+
+#headnote {
+    position: fixed;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    z-index: 50;
+    text-decoration: none;
+}
+
+#headnote.fade {
+    animation: headnote-fade 0.5s forwards;
+}
+
+@keyframes headnote-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

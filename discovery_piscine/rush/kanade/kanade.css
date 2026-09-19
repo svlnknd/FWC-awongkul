@@ -1,0 +1,35 @@
+html {
+    scroll-behavior: smooth;
+    user-select: none;
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+section {
+    position: relative;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+}
+
+h2 {
+    position: relative;
+    z-index: 100;
+
+    margin: 0;
+    padding-top: 10px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    text-align: center;
+
+    color: white;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
+}

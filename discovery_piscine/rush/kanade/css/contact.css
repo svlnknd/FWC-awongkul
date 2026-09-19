@@ -1,0 +1,57 @@
+#contact {
+    background-image: url("");
+}
+
+/* make a black overlay */
+
+#contact::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#contact:hover::before {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#contact {
+    background-color: black;
+}
+
+.contact-links {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 40px;
+}
+
+.contact-links a {
+    display: block;
+
+    text-decoration: none;
+
+    transition: transform 0.2s ease-in-out;
+}
+
+.contact-links a:hover {
+    transform: scale(1.15);
+}
+
+.contact-links img {
+    display: block;
+
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+}

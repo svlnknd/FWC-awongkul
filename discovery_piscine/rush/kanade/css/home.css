@@ -1,0 +1,53 @@
+#home {
+    background-image: url("../assets/clouds.png");
+}
+
+/* make a black overlay */
+
+#home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#home:hover::before {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.homequote {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 30px 45px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,transform 0.2s ease-in-out;
+}
+
+.homequote:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+    transform: translate(-50%, -50%) scale(1.03);
+}
+
+.homequote p {
+    margin: 0;
+    font-size: 50px;
+}
+
+.homequote span {
+    display: block;
+    margin-top: 12px;
+    font-size: 25px;
+    opacity: 0.7;
+}
